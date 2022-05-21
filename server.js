@@ -4,22 +4,20 @@ if(process.env.NODE_ENV!=="production")
 }
 
 const express = require('express');
-
 const app = express();
 
 const expressLayouts = require('express-ejs-layouts')
-
 app.set('view engine','ejs')
-
 app.set('views',__dirname+'/views');
 
 app.set('layout','layouts/layout')
 app.use(expressLayouts)
 app.use(express.static('public'))
 
+const bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded( {lmit :'10mb',extended:false}))
 
 const mongoose = require('mongoose')
-
 mongoose.connect(process.env.MONGODB_URL,
     {useNewUrlParser : true,
      useUnifiedTopology:true,
@@ -41,5 +39,8 @@ db.once('open',()=>
 
 const indexRouter = require('./routes/index')
 
+const authorRouter = require('./routes/authors')
+
 app.use('/',indexRouter)
+app.use('/authors',authorRouter)
 app.listen(process.env.PORT || 3000)
