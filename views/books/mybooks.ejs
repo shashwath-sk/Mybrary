@@ -1,0 +1,19 @@
+<h2>Search Books</h2>
+
+<form action="/books" method="GET">
+    <div>
+        <label >Tittle</label>
+    <input type="text" name="tittle" value="<%=searchOptions.tittle%>">
+    </div>
+    <div>
+        <label >Published After</label>
+        <input type="date" name="publishedAfter" value="<%= searchOptions.publishedAfter%>">
+    </div>
+    <div>  
+        <label >Published Before</label>
+        <input type="date"  name="publishedBefore" value="<%= searchOptions.publishedBefore%>">
+    </div>
+   <button type="submit">Submit</button>
+</form> 
+<br>
+ 

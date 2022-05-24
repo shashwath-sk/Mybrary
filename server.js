@@ -12,10 +12,10 @@ app.set('views',__dirname+'/views');
 
 app.set('layout','layouts/layout')
 app.use(expressLayouts)
-app.use(express.static('public'))
+// app.use(express.static('public'))
 
 const bodyParser = require('body-parser')
-app.use(bodyParser.urlencoded( {lmit :'10mb',extended:false}))
+app.use(bodyParser.urlencoded( {limit :'10mb',extended:false}))
 
 const mongoose = require('mongoose')
 mongoose.connect(process.env.MONGODB_URL,
@@ -41,6 +41,9 @@ const indexRouter = require('./routes/index')
 
 const authorRouter = require('./routes/authors')
 
+const bookRouter = require('./routes/books')
+
 app.use('/',indexRouter)
 app.use('/authors',authorRouter)
+app.use('/books',bookRouter)
 app.listen(process.env.PORT || 3000)
